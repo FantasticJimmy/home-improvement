@@ -1,0 +1,75 @@
+
+body{
+    margin: 0;
+  }
+  
+  #app {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #4d4d4d;
+    min-width: 550px;
+    margin: 0 auto;
+  }
+  .flex-centering{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .inline{
+    display: inline-block;
+  }
+  .block{
+    display: block;
+  }
+  
+  a.active {
+    text-decoration: none;
+  }
+  
+  nav {
+    padding: 20px;
+    background: #093AC9;
+    align-items: center;
+    height:30px;
+  }
+  .nav-left{
+    margin-left: auto;
+    width:30%;
+    float:left;
+  }
+  .nav-right{
+    margin-right: auto;
+    width: 10%;
+    float: right;
+  }
+  
+  .header{
+    font-weight: bold;
+    line-height:30px;
+    color:white;
+  }
+  .header > a{
+    color:white;
+  }
+  
+  .new_project{
+    margin-left:30px;
+  
+  }
+  .new_project > button{
+      background: red;
+      border: none;
+      height: 30px;
+      border-radius: 5px;
+      color:white;
+      padding-left:30px;
+      padding-right:30px;
+  }
+  .auth-button{
+    height: 30px;
+    border:none;
+    background:#073795;
+    color:white;
+    font-size:12px;
+    text-decoration: none;
+  }
+  

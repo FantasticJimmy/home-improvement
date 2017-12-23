@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <div class="container">
+      <p class="notice" style="display:none"><%= notice %></p>
+      <p class="alert" style="display:none"><%= alert %></p>
+    </div>
+    <%= render 'layouts/navbar' %>
     <%= yield %>
   </body>
 </html>

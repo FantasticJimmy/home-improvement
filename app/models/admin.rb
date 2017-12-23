@@ -1,4 +1,4 @@
-class User < ApplicationRecord
-    devise :database_authenticatable, :timeoutable           
+class Admin < ApplicationRecord
+    devise :database_authenticatable, :timeoutable   
 end
   
