@@ -1,8 +1,11 @@
 import ReactOnRails from 'react-on-rails';
 
-import HelloWorld from '../bundles/HelloWorld/components/HelloWorld';
+import AlertComponent from '../bundles/Project/components/AlertComponent';
+import ProjectsList from '../bundles/Project/components/ProjectsList';
+import NewProject from '../bundles/Project/components/NewProject';
+
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
-  HelloWorld,
+  ProjectsList, NewProject, AlertComponent
 });

@@ -20,12 +20,16 @@ ActiveRecord::Schema.define(version: 20171223184655) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.string  "type",        default: "private", null: false
-    t.integer "est_effort"
-    t.integer "act_effort"
-    t.string  "status",      default: "created", null: false
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "privacy",     default: "private", null: false
+    t.float    "est_effort"
+    t.float    "act_effort"
+    t.string   "status",      default: "created", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
