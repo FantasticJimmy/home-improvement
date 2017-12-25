@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook]
+  has_many :projects
+  has_many :comments, dependent: :destroy
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -11,5 +14,9 @@ class User < ApplicationRecord
       user.name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
     end
-  end         
+  end
+  
+  def is_admin?
+    Admin.exists? user_id: self.id #=> 1 or nil
+  end
 end

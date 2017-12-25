@@ -1,1 +1,5 @@
 
+<div class="self-centering" style="max-width:800px;">
+    <%= redux_store("projectsStore", props:  @projects_json)%>
+    <%= react_component("StoreWrapper", props: {}, prerender: false) %>
+</div>

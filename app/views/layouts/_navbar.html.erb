@@ -1,15 +1,23 @@
 <nav>
     <div class="nav-left">
-        <div class="header inline">HOME IMPROVEMENT</div>
-        <div class="new_project inline">
-            <button >NEW PROJECT</button>
+        <div class="header inline"><%= link_to 'HOME IMPROVEMENT', root_path, style: 'text-decoration: none;'%></div>
+        <div class="new_project inline" id="new_project_button">
         </div>
     </div>
     <div class="nav-right"> 
         <% if user_signed_in? %>
-            <%=link_to "Sign out",destroy_user_session_path, method:"delete", class:'auth-button flex-centering'%>
+            <%=link_to "Sign out",destroy_user_session_path, method:"delete", class:'auth-button flex-centering', wave: 'light'%>
         <% else %>
             <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class:'auth-button flex-centering' %>
         <% end %>
     </div>
 </nav>
+
+<script>
+
+$(document).ready(function(){
+    ReactOnRails.render('NewProject', {}, 'new_project_button');
+
+})
+
+</script>

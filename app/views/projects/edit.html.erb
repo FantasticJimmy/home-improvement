@@ -1,0 +1,32 @@
+
+<div class="self-centering" style="max-width:800px; margin-top:30px;">
+    <%= form_tag(project_path(@project), method: :put) do %>
+      <div>
+        <%= label_tag :name %>
+        <%= text_field_tag :name, @project.name %>
+      </div>
+      <div>
+        <%= label_tag :description %>
+        <%= text_field_tag :description, @project.description %>
+      </div>
+      <div>
+        <%= label_tag :type %>
+        <%=select_tag "privacy", options_for_select([ "private", "public" ], @project.privacy) %>
+      </div>
+      <div>
+        <%= label_tag :status %>
+        <%=select_tag "status", options_for_select([ "created", "started","stopped","completed" ], @project.status) %>
+      </div>
+      <div>
+        <%= label_tag "estimate Effort" %>
+        <%= number_field_tag :est_effort, @project.est_effort %>
+      </div>
+
+      <div>
+        <%= label_tag "actual Effort" %>
+        <%= number_field_tag :act_effort, @project.act_effort %>
+      </div>
+
+      <%= submit_tag "Save" %>
+    <% end %>
+</div>

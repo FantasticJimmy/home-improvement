@@ -10,22 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223184655) do
+ActiveRecord::Schema.define(version: 20171225063748) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_admins_on_user_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string  "name"
-    t.text    "description"
-    t.string  "type",        default: "private", null: false
-    t.integer "est_effort"
-    t.integer "act_effort"
-    t.string  "status",      default: "created", null: false
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "privacy",     default: "private", null: false
+    t.float    "est_effort"
+    t.float    "act_effort"
+    t.string   "status",      default: "created", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,8 +61,9 @@ ActiveRecord::Schema.define(version: 20171223184655) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "projects", "users"
 end

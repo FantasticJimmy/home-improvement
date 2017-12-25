@@ -1,0 +1,12 @@
+
+<div class="self-centering" style="max-width:800px; margin-top:30px;">
+    <%= form_tag(admin_comment_path(@comment), method: :put) do %>
+
+      <div>
+        <%= label_tag :content %>
+        <%= text_field_tag :content, @comment.content %>
+      </div>
+
+      <%= submit_tag "Save" %>
+    <% end %>
+</div>
