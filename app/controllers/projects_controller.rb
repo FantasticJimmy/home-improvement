@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
     end
 
     def update
-        new_params = params.permit(:name, :description, :privacy, :est_effort)
+        new_params = params.permit(:name, :description, :privacy, :est_effort, :act_effort, :status)
         @project.update(new_params)
         redirect_to projects_path
     end
@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
     private
         def project_params
             new_params = ActionController::Parameters.new(parse(params['payload']))
-            parsed_params = new_params.permit(:name, :description, :privacy, :est_effort)
+            parsed_params = new_params.permit(:name, :description, :privacy, :est_effort, :act_effort, :status)
         end
 
         def set_project

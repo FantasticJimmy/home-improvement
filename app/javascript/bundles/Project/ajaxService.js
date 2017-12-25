@@ -37,7 +37,7 @@ export function createComment(comment,project_id,cb){
         data: {payload: JSON.stringify(comment)},
         success: function(res,a,b,c){
             ReactOnRails.render('AlertComponent', {open:true,message:'Commented successfully',autoHideDuration: 4000, good: true}, 'alert_box');            
-            cb('success')
+            cb('success',res)
         },
         error: function(res,a,b,c){
             ReactOnRails.render('AlertComponent', {open:true,message:res.responseText,autoHideDuration: 4000, good: false}, 'alert_box');

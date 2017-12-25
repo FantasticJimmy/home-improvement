@@ -15,7 +15,7 @@ export default class ProjectsList extends React.Component {
     this.state = {projects: this.props.projects}
   }
   componentWillReceiveProps(nextProps){
-    debugger
+
   }
 
   updateName = (name) => {

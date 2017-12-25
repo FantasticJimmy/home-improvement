@@ -37,7 +37,10 @@ body{
 a.active {
   text-decoration: none;
 }
-
+.table-space{
+  padding-left:30px;
+  padding-right:30px;
+}
 nav {
   padding: 20px;
   background: #093AC9;

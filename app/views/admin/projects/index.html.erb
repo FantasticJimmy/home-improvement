@@ -1,0 +1,29 @@
+
+  <h1>Projects</h1>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th >User Name</th>
+        <th >name</th>
+        <th >description</th>
+        <th >Delete?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td class="table-space"><%= project.user.name %></td>
+          <td class="table-space"><%= link_to project.name, edit_admin_project_path(project)  %></td>
+          <td class="table-space"><%= project.description %></td>
+          <td class="table-space">
+          <%= form_tag(admin_project_path(project), method: :DELETE) do %>
+                  <%= submit_tag "Delete" %>
+          <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>

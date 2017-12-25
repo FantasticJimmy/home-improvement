@@ -9,29 +9,31 @@ import {createComment, getComments} from '../ajaxService';
 export default class CommentsList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {comments: Object.assign([],{},this.props.comments)}
+        this.state = {comments: Object.assign([],{})}
         this.submitComment = this.submitComment.bind(this)
     }
     componentDidMount(){
-      getComments(this.props.project_id,(comments)=>{
-        this.setState({comments})
+      getComments(this.props.project_id,(result,comments)=>{
+        if(result === 'success'){
+          this.setState({comments})
+        }
       })
     }
     submitComment(commentContent){
-      createComment(commentContent, this.props.project_id, (newComment)=>{
-        this.setState({comments: [
-          ...this.state.comments,
-          Object.assign({}, newComment)
-          ]
-        })
+      createComment(commentContent, this.props.project_id, (result,newComment)=>{
+        if(result === 'success'){
+          this.setState({comments: [
+            ...this.state.comments,
+            Object.assign({}, newComment)
+            ]
+          })
+        }
       })
     }
     render(){
       let comments = <div></div>
-
       if(this.state.comments.length != 0){
-        debugger
-        const comments = this.state.comments.map(comment,key=>{
+        comments = this.state.comments.sort((a,b)=>{return(moment(b.created_at).unix() - moment(a.created_at).unix())}).map((comment,key)=>{
           return(<Comment {...comment} key={comment.id} />)
         })
       }

@@ -16,10 +16,8 @@ ActiveRecord::Schema.define(version: 20171225063748) do
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_admins_on_user_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|

@@ -28,7 +28,7 @@ export default class Project extends React.Component {
   }
   render() {
     let statusColor;
-    switch(this.state.status){
+    switch(this.state.project.status){
         case 'created': 
           statusColor = 'yellow';
           break;
@@ -52,35 +52,35 @@ export default class Project extends React.Component {
             actAsExpander={false}
             
             >
-                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'1px solid ',width:'40%',borderColor: statusColor}}>
-                    Started
+                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'2px solid ',width:'40%',borderColor: statusColor, color: statusColor}}>
+                    {this.state.project.status}
                 </div>
             </CardHeader>
             <CardText expandable={false} style={{borderTop:'1px solid #E0E0E0',minHeight:'200px'}}>
                 <div>
 
                 </div>
-                <div className="project-card-icon">
-                    <span className="icon-item"><i className="fas fa-user"></i>&nbsp;&nbsp;{this.state.author.name}</span> 
-                    <span className="icon-item"><i className="far fa-clock"></i>&nbsp;&nbsp;{moment(this.state.project.updated_at).fromNow().slice(0,-4)}</span>
+                <div className="project-card-icon" style={{textDecoration: "underline"}} >
+                    <span className="icon-item" ><i className="fas fa-user"></i>&nbsp;{this.state.author.name}</span> 
+                    <span className="icon-item" ><i className="far fa-clock"></i>&nbsp;{moment(this.state.project.updated_at).fromNow().slice(0,-4)}</span>
                 </div>
                 <div className="">
                     <div className="project-card-description inline" style={{width:'50%', paddingRight:'20px'}}>
                         {this.state.project.description}
                     </div>
-                    <div className="project-card-effort-boxes inline" style={{width:'50%', padding:'30px'}}>
-                        <div className="project-card-est-effort-boxes effort-box flex-centering" style={{flexDirection:'column'}}>
+                    <div className="project-card-effort-boxes inline float-right" style={{width:'50%', padding:'30px'}}>
+                        <div className="project-card-est-effort-boxes effort-box flex-centering float-left" style={{flexDirection:'column',width:'46%'}}>
                             <div>Estimated level of effort</div>
                             <div>{this.state.project.est_effort}</div>
                         </div>
-                        <div className="project-card-act-effort-boxes effort-box flex-centering" style={{flexDirection:'column'}}>
+                        <div className="project-card-act-effort-boxes effort-box flex-centering float-right" style={{flexDirection:'column',width:'46%'}}>
                             <div>Actual level of effort</div>
                             <div>{this.state.project.act_effort}</div>
                         </div>
                     </div>
                 </div>
             </CardText>
-            <CommentsList project_id={this.state.project.id} currentUser={this.state.currentUser} comments={this.state.comments}/>
+            <CommentsList project_id={this.state.project.id} currentUser={this.state.currentUser} />
         </Card>
     );
   }

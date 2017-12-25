@@ -7,12 +7,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 export default class CommentBox extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {currentComment: ''}
         this.submitComment = this.submitComment.bind(this)
     }
 
     submitComment(event,x){
+        if(this.refs.commentField.input.value.trim() == ''){return;}
         this.props.submitComment(this.refs.commentField.input.value)
+        this.refs.commentField.input.value = ''
     }
     render(){
           return( 
@@ -23,7 +24,7 @@ export default class CommentBox extends React.Component {
                 style={{display:'block'}}
                 ref={'commentField'}
                 />
-                <RaisedButton className="block" label="Primary" primary={true} onClick={this.submitComment} style={{display:'block',maxWidth:'100px'}}/>
+                <RaisedButton className="block" label="Comment" primary={true} onClick={this.submitComment} style={{display:'block',maxWidth:'100px'}}/>
             </div>
           )
     }

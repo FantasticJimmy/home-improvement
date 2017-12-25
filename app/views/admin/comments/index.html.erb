@@ -1,0 +1,31 @@
+
+  <h1>Comments</h1>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th >User</th>
+        <th >content</th>
+        <th >Model</th>
+        <th >Created</th>
+        <th >Delete?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td class="table-space"><%= comment.user.name %></td>
+          <td class="table-space"><%= link_to comment.content, edit_admin_comment_path(comment) %></td>
+          <td class="table-space"><%= comment.commentable_type %></td>
+          <td class="table-space"><%= comment.created_at%></td>
+          <td class="table-space">
+          <%= form_tag(admin_comment_path(comment), method: :DELETE) do %>
+                  <%= submit_tag "Delete" %>
+          <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>

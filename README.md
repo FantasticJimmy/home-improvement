@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# create a .env file in root folder
+# in the email
 
-Things you may want to cover:
+Lexop Challenge
 
-* Ruby version
+# install server side dependencies
+bundle install
 
-* System dependencies
+# setup db
+rake db:creaate
+rake db:migrate
 
-* Configuration
+# install frontend dependencies
+npm install
 
-* Database creation
 
-* Database initialization
+# run dev 
+foreman start -f Procfile.dev
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# run server and webpack in seprate terminal
+rails s
+sh -c 'rm -rf public/packs/* || true && bundle exec rake react_on_rails:locale && bin/webpack-dev-server'
