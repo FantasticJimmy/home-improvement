@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :projects do
     get '/author' => 'projects#get_project_author'
+    resources :comments, only: [:create, :update, :destroy]    
   end
+
   
 end

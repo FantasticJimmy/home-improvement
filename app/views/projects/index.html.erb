@@ -1,4 +1,5 @@
 
 <div class="self-centering" style="max-width:800px;">
-    <%= react_component("ProjectsList", props: @projects_json, prerender: false) %>
+    <%= redux_store("projectsStore", props:  @projects_json)%>
+    <%= react_component("StoreWrapper", props: {}, prerender: false) %>
 </div>

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,7 +20,6 @@ export default class NewProject extends React.Component {
 
 constructor(props) {
     super(props);
-
     // How to set initial state in ES6 class syntax
     // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
         this.state = {
@@ -42,6 +44,16 @@ constructor(props) {
   };
   handleSubmit = () =>{
     let that = this;
+    const appStore = ReactOnRails.getStore("projectsStore");
+    
+    // const { actions } = this.props;
+    // actions
+    //   .submitComment(this.state.comment)
+    //   .then(this.resetAndFocus);
+
+    appStore.dispatch({type:'SUBMIT_PROJECT_SUCCESS',project:that.state.project})
+    
+    
     createProject(this.state.project,function(res){
       if(res==='success'){
         that.handleClose();
@@ -65,6 +77,8 @@ constructor(props) {
   };
 
   render() {
+
+    
     const actions = [
       <FlatButton
         label="Cancel"
@@ -77,7 +91,7 @@ constructor(props) {
         onClick={this.handleSubmit}
       />,
     ];
-    return (
+    return (    
       <MuiThemeProvider>
         <div>
             <RaisedButton label="NEW PROJECT" onClick={this.handleOpen} />
@@ -87,7 +101,6 @@ constructor(props) {
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
-  
             >
                 <div>
                     <TextField
@@ -127,10 +140,18 @@ constructor(props) {
                     </div>
                 </div>
             </Dialog>
-
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
+
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: bindActionCreators(dispatch)
+//   };
+// }
+
+// export default connect(mapDispatchToProps)(NewProject);

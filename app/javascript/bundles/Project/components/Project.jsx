@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import CommentsList from './CommentsList';
+import CommentBox from './CommentBox';
+
 
 import {getAuthor} from '../ajaxService';
 
@@ -11,7 +14,7 @@ export default class Project extends React.Component {
     };
   constructor(props) {
     super(props);
-    this.state = {project: Object.assign({},this.props.project), author: {}}
+    this.state = {project: Object.assign({},this.props.project), author: {}, comments: [], currentUser: {}}
   }
   componentDidMount(){
     const that = this;
@@ -44,7 +47,7 @@ export default class Project extends React.Component {
     return (
         <Card className="self-centering project-card">
             <CardHeader
-            title={<a style={{textDecoration:'none'}} href={"/projects/"+this.state.project.id}>{this.state.project.name}</a>}
+            title={<a style={{textDecoration:'none'}} href={"/projects/"+this.state.project.id+"/edit"}>{this.state.project.name}</a>}
             titleStyle={{fontSize:'2em',fontWeight:'bold'}}
             actAsExpander={false}
             
@@ -77,6 +80,7 @@ export default class Project extends React.Component {
                     </div>
                 </div>
             </CardText>
+            <CommentsList project_id={this.state.project.id} currentUser={this.state.currentUser} comments={this.state.comments}/>
         </Card>
     );
   }

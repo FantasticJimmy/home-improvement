@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_project, only: [:update, :edit]
+    before_action :check_owner, only: [:edit]
     include JsonParser
     include Response
     def index
@@ -15,8 +17,13 @@ class ProjectsController < ApplicationController
         end
     end
 
-    def show
-        @project_json = {project: Project.find(params[:id])}
+    def edit
+    end
+
+    def update
+        new_params = params.permit(:name, :description, :privacy, :est_effort)
+        @project.update(new_params)
+        redirect_to projects_path
     end
 
     def get_project_author
@@ -33,5 +40,16 @@ class ProjectsController < ApplicationController
         def project_params
             new_params = ActionController::Parameters.new(parse(params['payload']))
             parsed_params = new_params.permit(:name, :description, :privacy, :est_effort)
+        end
+
+        def set_project
+            @project = Project.find(params[:id])
+        end
+
+        def check_owner
+            if @project.user.id != current_user.id
+                flash[:notice] = 'You have no access to that.'
+                redirect_to projects_path
+            end
         end
 end
