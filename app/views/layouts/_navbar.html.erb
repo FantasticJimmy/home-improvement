@@ -1,7 +1,9 @@
 <nav>
     <div class="nav-left">
         <div class="header inline"><%= link_to 'HOME IMPROVEMENT', root_path, style: 'text-decoration: none;'%></div>
-        <div class="new_project inline" id="new_project_button">
+        <% if current_user %>
+            <div class="new_project inline" id="new_project_button">
+        <% end %>
         </div>
     </div>
     <div class="nav-right"> 
@@ -17,7 +19,6 @@
 
 $(document).ready(function(){
     ReactOnRails.render('NewProject', {}, 'new_project_button');
-
 })
 
 </script>
