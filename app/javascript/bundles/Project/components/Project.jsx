@@ -52,7 +52,7 @@ export default class Project extends React.Component {
             actAsExpander={false}
             style={{padding:'25px'}}
             >
-                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'2px solid ',width:'287px',borderColor: statusColor, color: statusColor,fontSize:'16px',borderRadius:'2px'}}>
+                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'2px solid ',width:'280px',borderColor: statusColor, color: statusColor,fontSize:'16px',borderRadius:'2px'}}>
                     {this.state.project.status}
                 </div>
             </CardHeader>

@@ -32,7 +32,7 @@ body{
 }
 
 .effort-box{
-  padding:20px 0;
+  padding-top:20px;
   background: #EFF3F7;
 }
 a.active {
@@ -126,16 +126,7 @@ nav {
   border: 2px solid #C9D6DF;
 }
 .vertical-line{
-  min-height:130px;
+  min-height:110px;
   border: 1px solid #C9D6DF;
   float: left;
-}
-
-
-.project-card-est-effort-boxes{
-
-}
-
-.project-card-act-effort-boxes{
-
 }
