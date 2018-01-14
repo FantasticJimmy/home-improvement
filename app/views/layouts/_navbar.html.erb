@@ -6,11 +6,11 @@
         <% end %>
         </div>
     </div>
-    <div class="nav-right"> 
+    <div class="nav-right flex-centering"> 
         <% if user_signed_in? %>
-            <%=link_to "Sign out",destroy_user_session_path, method:"delete", class:'auth-button flex-centering', wave: 'light'%>
+            <%=link_to "Sign out",destroy_user_session_path, method:"delete", class:'auth-button flex-centering uppercase', wave: 'light'%>
         <% else %>
-            <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class:'auth-button flex-centering' %>
+            <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class:'auth-button flex-centering uppercase' %>
         <% end %>
     </div>
 </nav>
@@ -18,7 +18,9 @@
 <script>
 
 $(document).ready(function(){
-    ReactOnRails.render('NewProject', {}, 'new_project_button');
+    if(document.getElementById('new_project_button')){
+        ReactOnRails.render('NewProject', {}, 'new_project_button');
+    }
 })
 
 </script>

@@ -20,14 +20,12 @@ export default class NewProject extends React.Component {
 
 constructor(props) {
     super(props);
-    // How to set initial state in ES6 class syntax
-    // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
         this.state = {
             open: false,
             project: {
                 name: '',
                 description: '',
-                privacy: 'private',
+                privacy: 'public',
                 est_effort: 8
             },
             openAlert: false,
@@ -94,7 +92,7 @@ constructor(props) {
     return (    
       <MuiThemeProvider>
         <div>
-            <RaisedButton label="NEW PROJECT" onClick={this.handleOpen} />
+            <RaisedButton label="NEW PROJECT" onClick={this.handleOpen} backgroundColor='red' labelColor='white' labelStyle={{fontSize:'12px'}} overlayStyle={{width:'180px'}}/>
             <Dialog
             title="START A NEW PROJECT"
             actions={actions}

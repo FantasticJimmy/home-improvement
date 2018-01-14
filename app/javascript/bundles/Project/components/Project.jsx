@@ -30,7 +30,7 @@ export default class Project extends React.Component {
     let statusColor;
     switch(this.state.project.status){
         case 'created': 
-          statusColor = 'yellow';
+          statusColor = 'pink';
           break;
         case 'started':
           statusColor = 'red';
@@ -47,35 +47,33 @@ export default class Project extends React.Component {
     return (
         <Card className="self-centering project-card">
             <CardHeader
-            title={<a style={{textDecoration:'none'}} href={"/projects/"+this.state.project.id+"/edit"}>{this.state.project.name}</a>}
+            title={<a style={{textDecoration:'none',color:'black'}} href={"/projects/"+this.state.project.id+"/edit"}>{this.state.project.name}</a>}
             titleStyle={{fontSize:'2em',fontWeight:'bold'}}
             actAsExpander={false}
-            
+            style={{padding:'25px'}}
             >
-                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'2px solid ',width:'40%',borderColor: statusColor, color: statusColor}}>
+                <div className="float-right flex-centering uppercase" style={{padding:'10px',border:'2px solid ',width:'287px',borderColor: statusColor, color: statusColor,fontSize:'16px',borderRadius:'2px'}}>
                     {this.state.project.status}
                 </div>
             </CardHeader>
-            <CardText expandable={false} style={{borderTop:'1px solid #E0E0E0',minHeight:'200px'}}>
+            <CardText expandable={false} style={{borderTop:'1px solid #E0E0E0',padding:'25px 25px 0 25px'}}>
+                <div className="project-card-icon" >
+                    <span className="icon-item" ><i className="fas fa-user"></i>&nbsp;<span style={{color:'#004D40', textDecoration: "underline"}}>{this.state.author.name}</span></span> 
+                    <span className="icon-item" ><i className="far fa-clock"></i>&nbsp;<span style={{color:'#004D40',textDecoration: "underline"}}>{moment(this.state.project.updated_at).fromNow().slice(0,-4)}</span></span>
+                </div>
                 <div>
-
-                </div>
-                <div className="project-card-icon" style={{textDecoration: "underline"}} >
-                    <span className="icon-item" ><i className="fas fa-user"></i>&nbsp;{this.state.author.name}</span> 
-                    <span className="icon-item" ><i className="far fa-clock"></i>&nbsp;{moment(this.state.project.updated_at).fromNow().slice(0,-4)}</span>
-                </div>
-                <div className="">
-                    <div className="project-card-description inline" style={{width:'50%', paddingRight:'20px'}}>
+                    <div className="project-card-description inline">
                         {this.state.project.description}
                     </div>
-                    <div className="project-card-effort-boxes inline float-right" style={{width:'50%', padding:'30px'}}>
-                        <div className="project-card-est-effort-boxes effort-box flex-centering float-left" style={{flexDirection:'column',width:'46%'}}>
-                            <div>Estimated level of effort</div>
-                            <div>{this.state.project.est_effort}</div>
+                    <div className="project-card-effort-boxes inline float-right" style={{width:'40%',color:'#78909C'}}>
+                        <div className="project-card-est-effort-boxes effort-box flex-centering float-left" style={{flexDirection:'column',width:'49.9%'}}>
+                            <div style={{fontSize:'14px',padding:'0 30px', textAlign:'center',fontWeight:'bold'}}>Estimated level of effort</div>
+                            <div style={{minHeight:'50px',fontSize:'30px',fontWeight:'bold',marginTop:'10px'}}>{this.state.project.est_effort}</div>
                         </div>
-                        <div className="project-card-act-effort-boxes effort-box flex-centering float-right" style={{flexDirection:'column',width:'46%'}}>
-                            <div>Actual level of effort</div>
-                            <div>{this.state.project.act_effort}</div>
+                        <div className="vertical-line"></div>
+                        <div className="project-card-act-effort-boxes effort-box flex-centering float-right" style={{flexDirection:'column',width:'49.4%'}}>
+                            <div style={{fontSize:'14px',padding:'0 30px', textAlign:'center',fontWeight:'bold',color: this.state.project.act_effort ? 'black' : 'inherit'}}>Actual<br/> level of effort</div>
+                            <div style={{minHeight:'50px',fontSize:'30px',fontWeight:'bold',marginTop:'10px',color: statusColor}}>{this.state.project.act_effort}</div>
                         </div>
                     </div>
                 </div>

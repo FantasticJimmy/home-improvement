@@ -38,7 +38,7 @@ export default class CommentsList extends React.Component {
         })
       }
         return (
-        <div className="container-fluid" id="comments" style={{padding: '50px',backgroundColor:'#fff'}}>
+        <div className="container-fluid" id="comments" style={{padding: '0 50px',backgroundColor:'#fff'}}>
           <div>
             <CommentBox submitComment={this.submitComment} currentUser={this.props.current_user} />
             <List>
