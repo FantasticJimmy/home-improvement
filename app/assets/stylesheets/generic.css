@@ -130,3 +130,13 @@ nav {
   border: 1px solid #C9D6DF;
   float: left;
 }
+.text-center{
+  text-align: center;
+}
+
+.container{ 
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}

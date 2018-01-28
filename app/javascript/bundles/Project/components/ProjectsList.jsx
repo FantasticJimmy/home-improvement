@@ -23,7 +23,7 @@ export default class ProjectsList extends React.Component {
   };
 
   render() {
-    const content = this.state.projects.map((project,key)=>
+    const content = this.state.projects.sort((a,b)=>(new Date(b.created_at).getTime() - new Date(a.created_at).getTime())).map((project,key)=>
       <Project key={key} project={project} />
     )
     return (

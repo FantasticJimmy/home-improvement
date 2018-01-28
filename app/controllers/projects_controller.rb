@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+    class ProjectsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_project, only: [:update, :edit]
     before_action :check_owner, only: [:edit]
@@ -21,9 +21,12 @@ class ProjectsController < ApplicationController
     end
 
     def update
-        new_params = params.permit(:name, :description, :privacy, :est_effort, :act_effort, :status)
+        if @project.user.id != current_user.id
+            render status: :unauthorized, text: 'You cannot edit this project.' and return
+        end
+        new_params = project_params
         @project.update(new_params)
-        redirect_to projects_path
+        render status: :ok, nothing: true
     end
 
     def get_project_author
@@ -48,7 +51,7 @@ class ProjectsController < ApplicationController
 
         def check_owner
             if @project.user.id != current_user.id
-                flash[:notice] = 'You have no access to that.'
+                flash[:alert] = 'You have no access to that.'
                 redirect_to projects_path
             end
         end

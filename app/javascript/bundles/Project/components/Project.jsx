@@ -3,7 +3,7 @@ import React from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import CommentsList from './CommentsList';
 import CommentBox from './CommentBox';
-
+import NewProject from './NewProject'
 
 import {getAuthor} from '../ajaxService';
 
@@ -14,7 +14,10 @@ export default class Project extends React.Component {
     };
   constructor(props) {
     super(props);
-    this.state = {project: Object.assign({},this.props.project), author: {}, comments: [], currentUser: {}}
+    this.state = {project: Object.assign({},this.props.project), author: {}, comments: [], currentUser: {}, popEditForm: false}
+  }
+  handleEdit = () => {
+    this.setState({popEditForm: true})
   }
   componentDidMount(){
     const that = this;
@@ -47,7 +50,7 @@ export default class Project extends React.Component {
     return (
         <Card className="self-centering project-card">
             <CardHeader
-            title={<a style={{textDecoration:'none',color:'black'}} href={"/projects/"+this.state.project.id+"/edit"}>{this.state.project.name}</a>}
+            title={<a style={{textDecoration:'none',color:'black',cursor:'pointer'}} onClick={this.handleEdit}>{this.state.project.name}</a>}
             titleStyle={{fontSize:'2em',fontWeight:'bold'}}
             actAsExpander={false}
             style={{padding:'25px'}}
@@ -78,6 +81,7 @@ export default class Project extends React.Component {
                     </div>
                 </div>
             </CardText>
+            <NewProject project={this.state.project} popForm={this.state.popEditForm} />
             <CommentsList project_id={this.state.project.id} currentUser={this.state.currentUser} />
         </Card>
     );

@@ -15,27 +15,31 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import Slider from 'material-ui/Slider';
 
-import {createProject} from '../ajaxService';
+import {createProject,editProject} from '../ajaxService';
 export default class NewProject extends React.Component {
 
 constructor(props) {
     super(props);
-        this.state = {
+        this.state = this.props.newProjectForm ?
+        {
             open: false,
             project: {
                 name: '',
                 description: '',
                 privacy: 'public',
                 est_effort: 8
-            },
-            openAlert: false,
-            responseMessage: ''
-        };
+            }
+        }
+        :
+        {
+            project: Object.assign({},this.props.project),
+            open: this.props.popForm
+        }
     }
 
   handleOpen = () => {
     this.setState({open: true});
-  };
+  }
 
   handleClose = () => {
     this.setState({open: false});
@@ -51,12 +55,21 @@ constructor(props) {
 
     appStore.dispatch({type:'SUBMIT_PROJECT_SUCCESS',project:that.state.project})
     
-    
-    createProject(this.state.project,function(res){
-      if(res==='success'){
-        that.handleClose();
-      }
-    })
+    if(this.props.newProjectForm){    
+        createProject(this.state.project,function(res){
+          if(res==='success'){
+            that.handleClose();
+            setTimeout(function(){window.location.reload()}, 500);
+          }
+        })
+    }else{
+        editProject(this.state.project,function(res){
+          if(res==='success'){
+            that.handleClose();
+            setTimeout(function(){window.location.reload()}, 500);
+          }
+        })
+    }
   }
   handleChange = (event, checked) =>{
     let project = this.state.project;
@@ -73,10 +86,10 @@ constructor(props) {
     project['est_effort'] = value;
     this.setState({project});
   };
-
+  componentWillReceiveProps(nextProps){
+    this.setState({project: nextProps.project, open: nextProps.popForm})
+  }
   render() {
-
-    
     const actions = [
       <FlatButton
         label="Cancel"
@@ -92,9 +105,14 @@ constructor(props) {
     return (    
       <MuiThemeProvider>
         <div>
-            <RaisedButton label="NEW PROJECT" onClick={this.handleOpen} backgroundColor='red' labelColor='white' labelStyle={{fontSize:'12px'}} overlayStyle={{width:'180px'}}/>
+            {        
+                this.props.newProjectForm ? 
+                (<RaisedButton label="NEW PROJECT" onClick={this.handleOpen} backgroundColor='red' labelColor='white' labelStyle={{fontSize:'12px'}} overlayStyle={{width:'180px'}}/>)
+                : 
+                (<div></div>)
+            }
             <Dialog
-            title="START A NEW PROJECT"
+            title={this.props.newProjectForm ? "START A NEW PROJECT" : "EDIT PROJECT"}
             actions={actions}
             modal={false}
             open={this.state.open}

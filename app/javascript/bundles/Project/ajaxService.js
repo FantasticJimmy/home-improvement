@@ -29,6 +29,23 @@ export function createProject(project,cb){
     return;
 }
 
+export function editProject(project,cb){
+    $.ajax({
+        type:"PUT",
+        url:'/projects/'+project.id,
+        beforeSend: $.rails.CSRFProtection,
+        data: {payload: JSON.stringify(project)},
+        success: function(res,a,b,c){
+            ReactOnRails.render('AlertComponent', {open:true,message:'Success',autoHideDuration: 4000, good: true}, 'alert_box');            cb('success')
+        },
+        error: function(res,a,b,c){
+            ReactOnRails.render('AlertComponent', {open:true,message:res.responseText,autoHideDuration: 4000, good: false}, 'alert_box');
+                cb('error')           
+        }
+    })
+    return;
+}
+
 export function createComment(comment,project_id,cb){
     $.ajax({
         type:"POST",

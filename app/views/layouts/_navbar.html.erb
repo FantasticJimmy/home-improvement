@@ -19,7 +19,7 @@
 
 $(document).ready(function(){
     if(document.getElementById('new_project_button')){
-        ReactOnRails.render('NewProject', {}, 'new_project_button');
+        ReactOnRails.render('NewProject', {newProjectForm: true}, 'new_project_button');
     }
 })
 
